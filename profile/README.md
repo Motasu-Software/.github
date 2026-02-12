@@ -26,7 +26,7 @@ The goal of Motasu is to bridge the gap between different simulators (iRacing, A
 * **📊 Unified Driver Profile:** Aggregate your stats from multiple simulators into one pro-looking card. Show off your safety ratings, win ratios, and favorite cars.
 * **🎨 Livery Showcase:** A dedicated space to display your best car designs and artistic creations to the community.
 * **🤝 Communities & Leagues:** Join groups, follow specific racing leagues, and stay updated on upcoming events.
-* 
+
 ### 🏗 Architecture
 
 Motasu relies on a modern, decoupled architecture to ensure scalability and performance across devices.
