@@ -44,21 +44,36 @@ Motasu relies on a modern, decoupled architecture to ensure scalability and perf
 * *Contact:* koroh6@gmail.com
 
 ---
-## 🎓 Contexte Académique : Mécanismes Réseaux & Sécurité
 
-*Cette section détaille les choix techniques réalisés dans le cadre du cours de **Réseaux Programmation Avancé**. Elle justifie l'architecture sous l'angle de la communication et de la sécurité des échanges.*
+## 🎓 Contexte Académique : Réalisations Techniques & Sécurité
 
-### 1. Architecture Réseau
-*Explication des choix de protocoles et de l'architecture Client/Serveur.*
-* [À compléter : Protocole de transport]
-* [À compléter : Protocole applicatif]
-* [À compléter : Gestion des flux]
+*Cette section détaille les implémentations réalisées dans le cadre du projet, couvrant les aspects de développement applicatif, d'architecture réseau et de sécurité.*
 
-### 2. Sécurité des Échanges
-*Détails sur la sécurisation des données transitant sur le réseau.*
-* [À compléter : Chiffrement]
-* [À compléter : Authentification]
-* [À compléter : Protection contre les attaques]
+### 🌍 Accès & Environnements de Déploiement
+
+L'application est déployée de manière automatisée sur une Machine Virtuelle (VM) et est accessible publiquement via des connexions sécurisées (HTTPS / Let's Encrypt) gérées par un reverse proxy **NGINX**.
+* **Production :** [https://motasu.corentinkorohrichard.fr](https://motasu.corentinkorohrichard.fr)
+* **Développement :** Environnement de staging isolé (`motasu-dev`).
+* **Local :** L'ensemble de l'écosystème peut être instancié en local en lançant simultanément les fichiers `docker-compose.yaml` présents dans les dépôts de l'API et du client Web.
+
+### 👥 Fonctionnalités Utilisateurs (Client Web Angular)
+L'interface utilisateur a été conçue pour être fluide et réactive (SPA), en communiquant avec l'API GraphQL :
+* **Authentification & Profil :** Création de compte sécurisée, connexion, et gestion de la suppression du compte.
+* **Réseau Social :** Création de nouvelles publications dans le flux d'actualité, possibilité de supprimer ses propres posts, et consultation des profils détaillés des auteurs.
+* **Expérience Utilisateur (UX) :** Implémentation d'un basculement dynamique entre le Mode Sombre et le Mode Clair.
+* **Sécurité Frontend :** Mise en place de Guards de navigation vérifiant la validité locale et serveur des jetons de connexion (JWT) à chaque démarrage.
+
+### ⚙️ Architecture Technique & CI/CD
+L'infrastructure s'appuie sur une philosophie de conteneurisation et d'intégration continue :
+* **Pipeline CI/CD :** Chaque nouvelle *Release* déclenche des workflows GitHub Actions automatisés. Ces pipelines construisent les images Docker optimisées, les poussent sur le registre, et ordonnent le déploiement sur la VM (dans les dossiers DEV ou PROD selon la branche).
+* **Frontend Web :** Utilisation d'Angular avec un build Docker *Multi-stage*. L'application est compilée puis servie par un conteneur NGINX ultra-léger garantissant d'excellentes performances.
+* **Backend API :** Serveur Node.js exploitant **Apollo Server (GraphQL)** pour des requêtes de données précises, connecté à une base de données **PostgreSQL** via l'ORM **Prisma**.
+
+### 🔒 Sécurité & Standards (ANSSI)
+La sécurité des données et des échanges a été pensée "Secure by Design", en s'inspirant des recommandations de l'ANSSI :
+* **Chiffrement en Transit :** Toutes les communications Client-Serveur sont chiffrées de bout en bout via TLS (Certificats Let's Encrypt).
+* **Stockage des Mots de Passe :** Les mots de passe ne sont jamais stockés en clair. Ils sont hachés de manière unilatérale via l'algorithme robuste `bcrypt` (intégrant un *salt* généré dynamiquement pour contrer les attaques par dictionnaire et tables arc-en-ciel).
+* **Gestion de Session (JWT) :** L'authentification repose sur des JSON Web Tokens (stateless). La validation s'effectue en deux temps : vérification de l'expiration locale côté client, suivie d'une vérification stricte côté serveur (Query GraphQL `me`) pour prévenir l'accès par des comptes suspendus ou supprimés.
 
 <br>
 <br>
