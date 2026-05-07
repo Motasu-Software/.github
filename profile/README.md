@@ -53,7 +53,7 @@ Motasu relies on a modern, decoupled architecture to ensure scalability and perf
 
 L'application est déployée de manière automatisée sur une Machine Virtuelle (VM) et est accessible publiquement via des connexions sécurisées (HTTPS / Let's Encrypt) gérées par un reverse proxy **NGINX**.
 * **Production :** [https://motasu.corentinkorohrichard.fr](https://motasu.corentinkorohrichard.fr)
-* **Développement :** Environnement de staging isolé (`motasu-dev`).
+* **Développement :** [https://motasu-dev.corentinkorohrichard.fr](https://motasu-dev.corentinkorohrichard.fr)
 * **Local :** L'ensemble de l'écosystème peut être instancié en local en lançant simultanément les fichiers `docker-compose.yaml` présents dans les dépôts de l'API et du client Web.
 
 ### 👥 Fonctionnalités Utilisateurs (Client Web Angular)
